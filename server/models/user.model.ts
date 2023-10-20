@@ -39,7 +39,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "please entere your password"],
+      // required: [true, "please entere your password"],
       minlenght: [8, "password must be at least 8 characters"],
       select: false,
     },
@@ -81,17 +81,17 @@ userSchema.methods.comparePassword = async function (
 };
 
 //sign acces token: when user login create an acces token
-// userSchema.methods.SignAccessToken = function () {
-//   return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || "", {
-//     expiresIn: "5m",
-//   });
-// };
+userSchema.methods.SignAccessToken = function () {
+  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || "", {
+    expiresIn: "5m",
+  });
+};
 //sign refresh token:
-// userSchema.methods.SignRefreshToken = function () {
-//   return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || "", {
-//     expiresIn: "3d",
-//   });
-// };
+userSchema.methods.SignRefreshToken = function () {
+  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || "", {
+    expiresIn: "3d",
+  });
+};
 
-const userModel: Model<IUser> = mongoose.model("User", userSchema);
-export default userModel;
+const UserModel: Model<IUser> = mongoose.model("User", userSchema);
+export default UserModel;

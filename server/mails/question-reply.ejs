@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reply notification</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .email-wrapper {
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .email-body {
+        margin: 20px 0;
+      }
+
+      .email-body p {
+        margin: 10px 0;
+        line-height: 1.4;
+      }
+
+      /* Center text within the email wrapper */
+      .email-body p {
+        text-align: center;
+      }
+
+      /* Additional styling for specific elements */
+      .email-body p:first-child {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .email-body p:last-child {
+        font-size: 16px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-wrapper">
+      <div class="email-body">
+        <p>hello <%= name %></p>
+        <p>
+          a new reply has been added to your question in the video "<%= name
+          %>".
+        </p>
+        <p>
+          Please login to our website to view the reply and continue the
+          discussion.
+        </p>
+        <p>Thank you for being a part of our community.</p>
+      </div>
+    </div>
+  </body>
+</html>
