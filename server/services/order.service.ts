@@ -1,11 +1,22 @@
-import { NextFunction } from "express";
-import { CatchAsyncError } from "../middelware/catchAsyncError";
-import OrderModel from "../models/order.model";
+import { Response } from "express";
+import orderModel from "../models/order.model";
 
-// create course
-export const newOrder = CatchAsyncError(
-  async (data: any, next: NextFunction) => {
-    const order = await OrderModel.create(data);
-    next(order);
-  }
-);
+//create new order:
+export const createOrderService = async (data: any, res: Response) => {
+  const order = await orderModel.create(data);
+
+  res.status(201).json({
+    success: true,
+    order,
+  });
+};
+
+//get all orders
+export const getAllOrdersService = async (res: Response) => {
+  const orders = await orderModel.find().sort({ createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    orders,
+  });
+};

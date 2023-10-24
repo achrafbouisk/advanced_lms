@@ -79,57 +79,60 @@ const CourseDataSchema: Schema<ICourseData> = new mongoose.Schema({
   question: [ComentSchema],
   reviews: [ReviwSchema],
 });
-const courseSchema: Schema<ICourse> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  estimatedPrice: {
-    type: Number,
-  },
-  thumbnail: {
-    public_id: {
+const courseSchema: Schema<ICourse> = new mongoose.Schema(
+  {
+    name: {
       type: String,
-      // required: true
+      required: true,
     },
-    url: {
+    description: {
       type: String,
-      // required: true
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    estimatedPrice: {
+      type: Number,
+    },
+    thumbnail: {
+      public_id: {
+        type: String,
+        // required: true
+      },
+      url: {
+        type: String,
+        // required: true
+      },
+    },
+    tags: {
+      type: String,
+      required: true,
+    },
+    level: {
+      type: String,
+      required: true,
+    },
+    demoUrl: {
+      type: String,
+      required: true,
+    },
+    benefits: [{ title: String }],
+    prerequisites: [{ title: String }],
+    reviews: [ReviwSchema],
+    courseData: [CourseDataSchema],
+    ratings: {
+      type: Number,
+      default: 0,
+    },
+    purchased: {
+      type: Number,
+      default: 0,
     },
   },
-  tags: {
-    type: String,
-    required: true,
-  },
-  level: {
-    type: String,
-    required: true,
-  },
-  demoUrl: {
-    type: String,
-    required: true,
-  },
-  benefits: [{ title: String }],
-  prerequisites: [{ title: String }],
-  reviews: [ReviwSchema],
-  courseData: [CourseDataSchema],
-  ratings: {
-    type: Number,
-    default: 0,
-  },
-  purchased: {
-    type: Number,
-    default: 0,
-  },
-});
+  { timestamps: true }
+);
 
 const CourseModel: Model<ICourse> = mongoose.model("Course", courseSchema);
 export default CourseModel;

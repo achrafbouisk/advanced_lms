@@ -1,11 +1,13 @@
 import express from "express";
 import {
   addAnswer,
-  addQuestions,
+  addQuestion,
   addReplyReview,
   addReview,
+  deleteCourse,
   editCourse,
   getAllCourses,
+  getAllCoursesAdmin,
   getCourseByUser,
   getSingleCourse,
   uploadCourse,
@@ -15,24 +17,25 @@ import { authorizeRole, isAuthenticated } from "../middelware/auth";
 const courseRouter = express.Router();
 
 courseRouter.post(
-  "/create-course",
+  "/courses",
   isAuthenticated,
   authorizeRole("admin"),
   uploadCourse
 );
 
 courseRouter.put(
-  "/edit-course/:id",
+  "/courses/:id",
   isAuthenticated,
   authorizeRole("admin"),
   editCourse
 );
 
-courseRouter.get("/get-course/:id", getSingleCourse);
-courseRouter.get("/all-courses", getAllCourses);
-courseRouter.get("/get-course-content/:id", isAuthenticated, getCourseByUser);
+courseRouter.get("/courses/:id", getSingleCourse);
+courseRouter.get("/courses", getAllCourses);
+courseRouter.get("/all-courses", getAllCoursesAdmin);
+courseRouter.get("/course-content/:id", isAuthenticated, getCourseByUser);
 
-courseRouter.put("/add-question", isAuthenticated, addQuestions);
+courseRouter.put("/add-question", isAuthenticated, addQuestion);
 courseRouter.put("/add-answer", isAuthenticated, addAnswer);
 
 courseRouter.put("/add-review/:id", isAuthenticated, addReview);
@@ -41,6 +44,13 @@ courseRouter.put(
   isAuthenticated,
   authorizeRole("admin"),
   addReplyReview
+);
+
+courseRouter.delete(
+  "/courses/:id",
+  isAuthenticated,
+  authorizeRole("admin"),
+  deleteCourse
 );
 
 export default courseRouter;
